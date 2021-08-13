@@ -1,0 +1,47 @@
+'''
+IFMG - Bambuí
+Diego de Lima Pereira
+Utilize um algoritmo de ordenação para realizar a seguinte tarefa: Dado um vetor A que contenha os seguintes números:
+
+A = [9 , 10 , -1, 3, 6, 2, 1, -3, 1, 0, -2, 15, 8, -7, 0] 
+
+A ordenação deve ser feita da seguinte forma de modo que a saída do algoritmo seja:
+
+A=[-7, -3, -2, -1, 0, 0, 1, 2, 3, 6, 8, 9, 10]
+
+Ou seja, os números zeros ficam no meio do vetor separando os números positivos dos números negativos. Minha dica para o exercício é: Utilizem um algoritmo de divisão e conquista.
+...
+
+
+def merg(vetor):
+
+    if len(vetor) == 1: 
+        return vetor
+    meio = len(vetor) // 2 
+    left = merg(vetor[:meio]) 
+    right = merg(vetor[meio:]) 
+    return merge(left, right)
+
+
+
+
+def merge(left, right):
+
+    resp = [] 
+    esq, dir = 0, 0 
+    while esq < len(left) and dir < len(right): 
+        if left[esq] < right[dir]: 
+            resp.append(left[esq])
+            esq += 1
+        else:
+            resp.append(right[dir]) 
+            dir += 1    
+    resp.extend(left[esq:])
+    resp.extend(right[dir:])
+    return resp
+
+
+
+vetor = [9 , 10 , -1, 3, 6, 2, 1, -3, 1, 0, -2, 15, 8, -7, 0]
+print(f"Vetor = {vetor}")
+print(f"Resultado ordenação: {merg(vetor)}")
